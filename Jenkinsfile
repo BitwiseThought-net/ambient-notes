@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // This "binds" your secret file to a temporary variable (envFile)
-                withCredentials([file(credentialsId: 'discord-terminal-bot-env', variable: 'envFile')]) {
+                withCredentials([file(credentialsId: 'jenkins-project-env', variable: 'envFile')]) {
                     script {
                         sh "[ -f '${envFile}' ] && cp '${envFile}' .env"
                         sh "cp ${envFile} .env"

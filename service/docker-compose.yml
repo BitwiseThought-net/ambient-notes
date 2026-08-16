@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+  ambient-notes-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ambient-notes-service:latest
+    container_name: ambient-notes-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${AMBIENT_NOTES_PORT:-8080}:8080"
+    depends_on:
+      dejavu-db:
+        condition: service_healthy
+    networks:
+      - ambient-notes-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8080/api/v1/health', timeout=3).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # MySQL-compatible DB used by the Dejavu fingerprinting provider. Only
+  # needed if PROVIDER_CHAIN includes "dejavu" (the default). Comment this
+  # service out (and remove the depends_on above) if you only use cloud
+  # fallback providers.
+  dejavu-db:
+    image: mariadb:11
+    container_name: ambient-notes-dejavu-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DEJAVU_DB_ROOT_PASSWORD:-changeme_root}
+      MYSQL_DATABASE: ${DEJAVU_DB_NAME:-dejavu}
+      MYSQL_USER: ${DEJAVU_DB_USER:-dejavu}
+      MYSQL_PASSWORD: ${DEJAVU_DB_PASSWORD:-changeme}
+    volumes:
+      - dejavu-db-data:/var/lib/mysql
+    networks:
+      - ambient-notes-net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  # Optional local LLM runtime used by the Ollama fallback provider. Remove
+  # this service (and set OLLAMA_ENABLED=false in .env) if you don't want
+  # to run a local model, or if you're pointing OLLAMA_BASE_URL at an
+  # existing Ollama instance elsewhere on your network.
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ambient-notes-ollama
+    restart: unless-stopped
+    profiles: ["ollama"]  # only starts with `docker compose --profile ollama up`
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - ambient-notes-net
+    # Uncomment to expose GPU acceleration (requires nvidia-container-toolkit)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+networks:
+  ambient-notes-net:
+    driver: bridge
+
+volumes:
+  dejavu-db-data:
+  ollama-data:
