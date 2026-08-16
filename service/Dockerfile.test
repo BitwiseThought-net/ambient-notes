@@ -1,0 +1,16 @@
+# Lightweight image used only by CI to run the test suite in an isolated,
+# reproducible environment (no ffmpeg/build-essential needed since dejavu
+# is intentionally excluded from the unit test surface -- see
+# app/providers/dejavu_provider.py docstring).
+FROM python:3.12-slim
+
+WORKDIR /srv/app
+
+COPY requirements.txt requirements-dev.txt ./
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+COPY app ./app
+COPY tests ./tests
+COPY pyproject.toml ./
+
+CMD ["python", "-m", "pytest", "--cov=app", "--cov-report=term-missing", "--cov-fail-under=90"]

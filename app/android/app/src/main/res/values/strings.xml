@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AmbientNotes</string>
+    <string name="listening_notification_channel_name">Ambient listening</string>
+    <string name="listening_notification_title">AmbientNotes is listening</string>
+    <string name="listening_notification_text">Identifying music playing nearby</string>
+</resources>
