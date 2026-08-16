@@ -1,6 +1,6 @@
 # AmbientNotes Project
 
-Two repositories, delivered together as a starting point:
+Two projects:
 
 - **app/android** — the Android app (Kotlin, Jetpack Compose). See its own README.md.
 - **service** — the optional self-hosted Python recognition backend
