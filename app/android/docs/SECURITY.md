@@ -1,4 +1,4 @@
-# Security Notes — AmbientNotes (Android)
+# Security Notes - AmbientNotes (Android)
 
 ## Credential storage
 
@@ -14,21 +14,21 @@ test; see the `NOTE ON SECRETS` doc comment in `SettingsRepository.kt`.
 ## Network communication
 
 - All recognition-source and target requests go over HTTPS to the respective provider's own API (ACRCloud,
-  AudD, Mastodon instance, Bluesky PDS, etc.) — the app does not proxy these through any Anthropic/AmbientNotes-
+  AudD, Mastodon instance, Bluesky PDS, etc.) - the app does not proxy these through any Anthropic/AmbientNotes-
   operated server.
-- The self-hosted service connection should use HTTPS or a private network (VPN/Tailscale) — see
+- The self-hosted service connection should use HTTPS or a private network (VPN/Tailscale) - see
   [AmbientNotesService's SECURITY.md](../../ambient-notes-service/docs/SECURITY.md) for setting that up.
 
 ## Permissions
 
-- `RECORD_AUDIO` — required for ambient listening; requested at runtime, revocable anytime in system
+- `RECORD_AUDIO` - required for ambient listening; requested at runtime, revocable anytime in system
   Settings, and the listening loop no-ops gracefully if not granted (see `AudioCaptureService.captureAndRecognizeOnce`).
-- `FOREGROUND_SERVICE` / `FOREGROUND_SERVICE_MICROPHONE` — required so listening survives Doze/background
+- `FOREGROUND_SERVICE` / `FOREGROUND_SERVICE_MICROPHONE` - required so listening survives Doze/background
   restrictions; Android always shows a persistent notification while this is active, by OS design, so the
   user always has a visible indicator that the mic may be sampled.
-- `POST_NOTIFICATIONS` — required on Android 13+ to show that same listening notification.
-- `RECEIVE_BOOT_COMPLETED` — only used to resume listening after reboot, and only if the user had explicitly
-  enabled listening before the reboot (see `BootCompletedReceiver.kt`) — it's not a way to silently
+- `POST_NOTIFICATIONS` - required on Android 13+ to show that same listening notification.
+- `RECEIVE_BOOT_COMPLETED` - only used to resume listening after reboot, and only if the user had explicitly
+  enabled listening before the reboot (see `BootCompletedReceiver.kt`) - it's not a way to silently
   auto-start on first install.
 
 ## What this app does NOT do
@@ -37,7 +37,7 @@ test; see the `NOTE ON SECRETS` doc comment in `SettingsRepository.kt`.
   to the recognition source(s) you've enabled, and discards it.
 - It does not access the microphone in the background beyond the user-configured sampling interval, and only
   while the foreground service (with its visible notification) is running.
-- It does not bundle or share the app authors' own cloud API keys — every cloud recognition source and every
+- It does not bundle or share the app authors' own cloud API keys - every cloud recognition source and every
   authenticated post target requires the user's own account/credentials, so there's no shared quota or
   shared attack surface across users.
 

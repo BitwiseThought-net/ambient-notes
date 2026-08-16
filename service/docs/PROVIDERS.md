@@ -2,7 +2,7 @@
 
 AmbientNotesService recognizes a song by walking an ordered chain of **providers**, each implementing the
 same interface. This lets you add, remove, or reorder recognition backends by editing `PROVIDER_CHAIN` in
-`.env` and dropping in a Python module — no changes to the request-handling code, and no recompilation.
+`.env` and dropping in a Python module - no changes to the request-handling code, and no recompilation.
 
 ## The interface
 
@@ -23,7 +23,7 @@ class RecognitionProvider(ABC):
         return None  # override to release resources (HTTP clients, DB pools)
 ```
 
-`recognize()` must never raise for "no match" — return `RecognitionResult(matched=False, provider=self.name)`
+`recognize()` must never raise for "no match" - return `RecognitionResult(matched=False, provider=self.name)`
 instead. Exceptions are reserved for real transport/config failures, which the orchestrator
 (`app/recognition_service.py`) catches, logs, and treats as "move to the next provider in the chain."
 
@@ -66,10 +66,10 @@ class MyProvider(RecognitionProvider):
    `.env.example`.
 3. Import the module in `app/providers/registry.py::_import_builtin_providers()` (or, for a truly external
    plugin you don't want to fork this repo for, install it as a separate pip package and import it from
-   your own `app/providers/__init__.py` override — the registry doesn't care where a provider class comes
+   your own `app/providers/__init__.py` override - the registry doesn't care where a provider class comes
    from, only that `@register_provider` ran before `build_provider()` is called).
 4. Add `my_provider` to `PROVIDER_CHAIN` in `.env`.
-5. Write tests in `tests/test_providers.py` following the existing `respx`-mocked HTTP examples — no live
+5. Write tests in `tests/test_providers.py` following the existing `respx`-mocked HTTP examples - no live
    network calls in the test suite.
 
 That's the whole contract. The orchestrator, the API endpoint, and the Android app don't need to know your

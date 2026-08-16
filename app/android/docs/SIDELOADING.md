@@ -1,6 +1,6 @@
 # Sideloading AmbientNotes
 
-AmbientNotes isn't published on the Play Store — it's installed directly ("sideloaded") from a built APK.
+AmbientNotes isn't published on the Play Store - it's installed directly ("sideloaded") from a built APK.
 
 ## Option A: from a CI build (no local build environment needed)
 
@@ -42,9 +42,9 @@ your phone's browser):**
 
 1. Grant the microphone permission when prompted (needed for ambient listening).
 2. Grant the notifications permission (Android 13+) so the "AmbientNotes is listening" foreground-service
-   notification can show — Android requires this for any persistent background service.
+   notification can show - Android requires this for any persistent background service.
 3. Go to **Settings** in-app to connect at least one recognition source and, optionally, one or more post
-   targets — see [docs/CONFIGURATION.md](CONFIGURATION.md).
+   targets - see [docs/CONFIGURATION.md](CONFIGURATION.md).
 4. Consider exempting AmbientNotes from battery optimization (Settings → Apps → AmbientNotes → Battery →
    Unrestricted) if you want listening to survive aggressive OEM battery managers (Samsung, Xiaomi, etc. are
    known to kill background services more aggressively than stock Android).

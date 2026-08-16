@@ -62,4 +62,4 @@ Runs automatically on every pull request via [.github/workflows/android-ci.yml](
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
