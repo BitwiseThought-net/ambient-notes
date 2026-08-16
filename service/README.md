@@ -10,10 +10,10 @@ cloud/LLM providers when the local library misses.
 ## Features
 
 - **FastAPI** HTTP API, single endpoint the Android app calls: `POST /api/v1/recognize`.
-- **Pluggable provider chain** — recognize locally first (Dejavu), then fall back to a local LLM
-  (Ollama), then to cloud services (ACRCloud, AudD), then to peer AmbientNotesService instances —
+- **Pluggable provider chain** - recognize locally first (Dejavu), then fall back to a local LLM
+  (Ollama), then to cloud services (ACRCloud, AudD), then to peer AmbientNotesService instances -
   in whatever order you configure, no recompilation needed.
-- **Drop-in providers** — add a new backend by writing one Python module and registering it; see
+- **Drop-in providers** - add a new backend by writing one Python module and registering it; see
   [docs/PROVIDERS.md](docs/PROVIDERS.md).
 - **Docker Compose** deployment: `docker compose up -d --build` and you're running.
 - **API-key authentication** and guidance for putting the service behind TLS.
@@ -54,9 +54,9 @@ uvicorn app.main:app --reload   # run the API locally without Docker
 
 Tests run automatically on every pull request via [.github/workflows/ci.yml](.github/workflows/ci.yml)
 and enforce a minimum of 90% line coverage on `app/` (`dejavu_provider.py`'s I/O path is exercised via
-its availability guard rather than a live fingerprint DB in CI — see the coverage config in
+its availability guard rather than a live fingerprint DB in CI - see the coverage config in
 `pyproject.toml` for the rationale).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).

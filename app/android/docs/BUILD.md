@@ -29,7 +29,7 @@ keyPassword=your-key-password
 ```
 
 Then wire it into `app/build.gradle.kts`'s `android { signingConfigs { ... } }` block (a `release` signing
-config referencing the properties file above — omitted from the default build script so a fresh checkout
+config referencing the properties file above - omitted from the default build script so a fresh checkout
 never fails to build for lack of a keystore; add it before you cut your first signed release).
 
 ```bash

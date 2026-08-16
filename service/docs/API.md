@@ -1,4 +1,4 @@
-# API Reference — AmbientNotesService
+# API Reference - AmbientNotesService
 
 Base URL: `https://<your-host>:8080` (see SECURITY.md for why this should be HTTPS/VPN, not plain HTTP, in
 production).
@@ -75,4 +75,4 @@ uptime monitor or the Docker `HEALTHCHECK`.
 ## `GET /api/v1/providers`
 
 Unauthenticated. Returns the list of provider *types* built into this deployment (not the same as the
-active chain) — useful when writing your `.env` to see valid `PROVIDER_CHAIN` values.
+active chain) - useful when writing your `.env` to see valid `PROVIDER_CHAIN` values.

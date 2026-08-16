@@ -1,9 +1,9 @@
-# Dev Environment Setup — AmbientNotes (Android)
+# Dev Environment Setup - AmbientNotes (Android)
 
 ## 1. Prerequisites
 
-- **JDK 17+** — [Temurin](https://adoptium.net/) is a good free distribution.
-- **Android Studio** (Koala/2024.1+ recommended) — https://developer.android.com/studio. Includes the Android
+- **JDK 17+** - [Temurin](https://adoptium.net/) is a good free distribution.
+- **Android Studio** (Koala/2024.1+ recommended) - https://developer.android.com/studio. Includes the Android
   SDK, platform tools (`adb`), and an emulator manager. Command-line-only setups can instead install the
   [Android command-line tools](https://developer.android.com/tools) directly.
 - A device or emulator running **Android 8.0 (API 26)** or newer (`minSdk = 26`, chosen because
@@ -18,7 +18,7 @@ cd ambient-notes
 
 ## 3. Bootstrap the Gradle wrapper
 
-This repo intentionally does **not** commit `gradle/wrapper/gradle-wrapper.jar` (a binary file) — only
+This repo intentionally does **not** commit `gradle/wrapper/gradle-wrapper.jar` (a binary file) - only
 `gradle-wrapper.properties`, which pins the exact Gradle version (`8.7`). Generate the jar once:
 
 ```bash
@@ -29,7 +29,7 @@ This checks your JDK version and runs `gradle wrapper --gradle-version 8.7` for 
 install if present, or prompting you to install one / open in Android Studio instead, which does this
 automatically on first project sync).
 
-If you'd rather do it by hand: open the project folder in Android Studio — it detects the missing wrapper
+If you'd rather do it by hand: open the project folder in Android Studio - it detects the missing wrapper
 jar and offers to regenerate it as part of the initial Gradle sync.
 
 ## 4. Open / build
@@ -48,6 +48,6 @@ Run button, or Build → Build Bundle(s)/APK(s) → Build APK(s).
 
 ## 5. Next steps
 
-- [docs/BUILD.md](BUILD.md) — release builds, signing, ProGuard/R8
-- [docs/SIDELOADING.md](SIDELOADING.md) — installing a build onto your own device without the Play Store
-- [docs/CONFIGURATION.md](CONFIGURATION.md) — connecting recognition sources and post targets on-device
+- [docs/BUILD.md](BUILD.md) - release builds, signing, ProGuard/R8
+- [docs/SIDELOADING.md](SIDELOADING.md) - installing a build onto your own device without the Play Store
+- [docs/CONFIGURATION.md](CONFIGURATION.md) - connecting recognition sources and post targets on-device

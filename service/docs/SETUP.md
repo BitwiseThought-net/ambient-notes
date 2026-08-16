@@ -1,8 +1,8 @@
-# Setup Guide — AmbientNotesService
+# Setup Guide - AmbientNotesService
 
 ## 1. Prerequisites
 
-- A machine that's reachable from your phone 24/7 — a home server, NAS (with Docker support), or a small
+- A machine that's reachable from your phone 24/7 - a home server, NAS (with Docker support), or a small
   VPS. 1 vCPU / 1 GB RAM is enough if you're only running `dejavu` + cloud fallbacks; add more if you
   enable the local `ollama` profile (a 7-8B model wants ~8 GB RAM, more with a GPU).
 - **Docker Engine 24+** and the **Compose plugin** (`docker compose version` should print `v2.x`).
@@ -10,7 +10,7 @@
     https://docs.docker.com/engine/install/linux-postinstall/ so you don't need `sudo` for every command.
   - Synology/QNAP: install Docker/Container Manager from the package center; Compose v2 ships with recent
     versions.
-- Optionally, `openssl` on the host (used by `scripts/setup.sh` to generate your API key — most Linux/macOS
+- Optionally, `openssl` on the host (used by `scripts/setup.sh` to generate your API key - most Linux/macOS
   systems have this already).
 - A domain name or dynamic-DNS hostname if you want to reach the service from outside your home network. See
   [SECURITY.md](SECURITY.md) for exposing it safely.
@@ -30,9 +30,9 @@ cp .env.example .env
 
 Open `.env` and set, at minimum:
 
-- `API_KEYS` — a long random string (or several, comma-separated, for key rotation). This is what the
+- `API_KEYS` - a long random string (or several, comma-separated, for key rotation). This is what the
   Android app authenticates with. `openssl rand -hex 32` is a good way to generate one.
-- `PROVIDER_CHAIN` — the order to try recognition backends in. The default `dejavu,ollama` tries your local
+- `PROVIDER_CHAIN` - the order to try recognition backends in. The default `dejavu,ollama` tries your local
   fingerprint library first, then a local LLM guess as a last resort, and never leaves your network. Add
   `acrcloud` and/or `audd` (and set the matching `*_ENABLED`/credentials) if you want cloud fallback for
   songs your local library doesn't know.
@@ -49,8 +49,8 @@ docker compose up -d --build
 ```
 
 This starts:
-- `ambient-notes-service` — the FastAPI app, on port `8080` by default (`AMBIENT_NOTES_PORT` in `.env`).
-- `dejavu-db` — a MariaDB instance backing the local fingerprint database.
+- `ambient-notes-service` - the FastAPI app, on port `8080` by default (`AMBIENT_NOTES_PORT` in `.env`).
+- `dejavu-db` - a MariaDB instance backing the local fingerprint database.
 
 To also run a local Ollama instance (rather than pointing `OLLAMA_BASE_URL` at one elsewhere):
 
@@ -75,17 +75,17 @@ docker compose exec ambient-notes-service python -m app.tools.fingerprint_librar
 ```
 
 > This project ships the provider interface and orchestration fully wired up; the batch-fingerprinting CLI
-> is a thin wrapper around Dejavu's own `fingerprint_directory` API — see
+> is a thin wrapper around Dejavu's own `fingerprint_directory` API - see
 > [docs/PROVIDERS.md](PROVIDERS.md#dejavu) for the few lines needed to adapt it to your own music library
 > layout, since everyone's collection is organized differently.
 
 If you skip this step, `dejavu` will simply report "no match" for everything and requests will fall through
-to your next configured provider — nothing breaks.
+to your next configured provider - nothing breaks.
 
 ## 6. Point the Android app at your service
 
 In AmbientNotes: **Settings → Recognition Source → Add self-hosted service**, enter:
-- **Base URL**: `https://your-domain-or-ip:8080` (use HTTPS in production — see SECURITY.md)
+- **Base URL**: `https://your-domain-or-ip:8080` (use HTTPS in production - see SECURITY.md)
 - **API key**: the value of `API_KEYS` from your `.env`
 
 ## 7. Updating
@@ -106,7 +106,7 @@ docker compose down        # stop everything (add -v to also wipe the fingerprin
 Common issues:
 - **401 from the app**: `API_KEYS` in `.env` doesn't match what's entered in the app, or you edited `.env`
   without restarting (`docker compose up -d` after any `.env` change).
-- **503 "no API_KEYS configured"**: you left `API_KEYS` blank — the service refuses to run unauthenticated.
+- **503 "no API_KEYS configured"**: you left `API_KEYS` blank - the service refuses to run unauthenticated.
 - **`dejavu` provider always "unavailable"**: the optional native build step in the Docker image failed for
   your platform; check `docker compose logs ambient-notes-service` at startup, or run with
   `PROVIDER_CHAIN=ollama` (or a cloud provider) in the meantime.

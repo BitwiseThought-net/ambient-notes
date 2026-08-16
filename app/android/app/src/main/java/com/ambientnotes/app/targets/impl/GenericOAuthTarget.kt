@@ -67,7 +67,7 @@ abstract class GenericOAuthTarget(
     }
 }
 
-/** POST https://api.twitter.com/2/tweets — template should render {"text": "..."} */
+/** POST https://api.twitter.com/2/tweets - template should render {"text": "..."} */
 class TwitterXTarget(config: PostTargetConfig) : GenericOAuthTarget(config) {
     override fun endpointUrl(settings: Map<String, String>) = "https://api.twitter.com/2/tweets"
 }
