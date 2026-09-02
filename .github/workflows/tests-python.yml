@@ -5,6 +5,8 @@ on:
     types: [opened, synchronize, reopened]
     branches: 
       - '*'
+    branches-ignore:
+      - main
   workflow_dispatch: {}
 
 jobs:
