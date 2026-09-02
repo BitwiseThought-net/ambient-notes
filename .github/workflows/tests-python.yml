@@ -36,6 +36,7 @@ jobs:
         if [ -f service/requirements-dev.txt ]; then
           pip install -r service/requirements-dev.txt
         fi
+        pip install "genbadge[coverage,tests]"
 
     - name: Run tests
       run: |
@@ -81,20 +82,20 @@ jobs:
       run: cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
 
     - name: Post coverage summary as PR comment
-      if: always() && github.ref == 'refs/heads/main'
+      if: always() && github.event_name == 'pull_request'
       uses: marocchino/sticky-pull-request-comment@v3
       with:
         recreate: true
         path: code-coverage-results.md
     - name: Generate coverage and test badges
-      if: always() && github.ref == 'refs/heads/main'
+      if: always() && github.event_name == 'pull_request'
       run: |
         mkdir -p badges
         genbadge coverage -i coverage.xml -o badges/coverage-badge.svg --local
         genbadge tests -i pytest-results.xml -o badges/tests-badge.svg --local
 
     - name: Commit updated badges
-      if: always() && github.ref == 'refs/heads/main'
+      if: always() && github.event_name == 'pull_request'
       uses: stefanzweifel/git-auto-commit-action@v7
       with:
         commit_message: "chore: update coverage and test badges [skip ci]"
