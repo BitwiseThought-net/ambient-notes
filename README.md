@@ -1,6 +1,6 @@
 [![Tests](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml/badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml)
-[![Coverage](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/main/badges/coverage-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml)
-[![Tests Passing](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/main/badges/tests-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml)
+[![Coverage](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/refs/heads/main/badges/coverage-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml)
+[![Tests Passing](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/refs/heads/main/badges/tests-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests-python.yml)
 
 # AmbientNotes Project
 
