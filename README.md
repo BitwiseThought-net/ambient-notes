@@ -1,5 +1,10 @@
 # AmbientNotes Project
 
+[![Tests](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests.yml/badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests.yml)
+[![Coverage](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/main/badges/coverage-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests.yml)
+[![Tests Passing](https://raw.githubusercontent.com/BitwiseThought-net/ambient-notes/main/badges/tests-badge.svg)](https://github.com/BitwiseThought-net/ambient-notes/actions/workflows/tests.yml)
+
+---
 Two projects:
 
 - **app/android** - the Android app (Kotlin, Jetpack Compose). See its own README.md.
